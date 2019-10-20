@@ -8,6 +8,8 @@ class Card():
     def __init__(self, suit, value):
         self.suit = suit
         self.value = value
+    def __str__(self):
+        return f'{self.value} of {self.suit}'
 
 class Player():
     def __init__(self, name):
@@ -23,8 +25,7 @@ class Deck():
         self.cards = []
         for suit in suits:
             for value in values:
-                self.cards.append(Card(value, suit))
-        print(self.cards)
+                self.cards.append(Card(suit, value))
 
 playing = True
 
@@ -44,7 +45,8 @@ while playing:
     # Placeholder for actual game logic
     print("Pretend we played a game...", '\n')
     deck = Deck()
-    print(deck.cards)
+    for card in deck.cards:
+        print(card)
 
     # Is it time to break out of the main game loop?
     play_again = input("Would you like to play again? (y/n) ")
