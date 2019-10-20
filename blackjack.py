@@ -3,7 +3,7 @@ from random import randint, choice
 
 class Game():
     def __init__(self):
-        playing = True
+        self.playing = True
 
 class Card():
     def __init__(self, suit, value):
@@ -44,14 +44,11 @@ class Deck():
         for num in range(0, quantity):
             player.hand.append(self.cards.pop(randint(0, len(self.cards) - 1)))
 
-# Game:
-
-playing = True
-
+game = Game()
 
 player_name = input("Please type your name ")
 
-while playing:
+while game.playing:
 
     player = Player(name=player_name)
     dealer = Player(name='Dealer')
@@ -86,7 +83,9 @@ while playing:
     play_again = input("Would you like to play again? (y/n) ")
 
     if play_again == 'n':
-        playing = False
+        game.playing = False
+        print("Thanks for playing!")
+        time.sleep(2)
 
 
 # TODO:
