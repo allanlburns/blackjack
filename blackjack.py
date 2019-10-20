@@ -18,15 +18,17 @@ class Player():
         self.total = 0
         self.hand = []
 
-        def score(self):
-            for card in self.hand:
-                if card == 'A':
-                    self.total += 11
-                elif card in ['J', 'Q', 'K']:
-                    self.total += 10
-                else:
-                    self.total += int(card)
-            return self.total
+    def score(self):
+        for card in self.hand:
+            if card.value == 'A' and self.hand.count('A') < 1:
+                self.total += 11
+            elif card.value in ['J', 'Q', 'K']:
+                self.total += 10
+            elif card.value == 'A' and total > 10:
+                self.total += 1
+            else:
+                self.total += int(card.value)
+        return self.total
 
 class Deck():
     def __init__(self):
@@ -42,10 +44,14 @@ class Deck():
         for num in range(0, quantity):
             player.hand.append(self.cards.pop(randint(0, len(self.cards) - 1)))
 
+# Game:
+
 playing = True
 
+
+player_name = input("Please type your name ")
+
 while playing:
-    player_name = input("Please type your name ")
 
     player = Player(name=player_name)
     dealer = Player(name='Dealer')
@@ -63,11 +69,17 @@ while playing:
     print('\n', f"{player.name}'s hand after dealing cards:", end=" ")
     for card in player.hand:
         print(card, end='')
-    print('\n', '\n')
+
+    # display player's current total
+    print('\n', f"{player.name}'s total = {player.score()}")
+
     print('\n', f"{dealer.name}'s hand:", end=" ")
     print("? of ?,", end=' ')
     for card in dealer.hand[1:]:
         print(card, end='')
+
+    # display dealer's current total
+    print('\n', f"Dealer's total = {dealer.score()}")
 
 
     # Is it time to break out of the main game loop?
