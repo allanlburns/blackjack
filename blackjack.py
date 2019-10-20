@@ -16,8 +16,15 @@ class Player():
         self.hand = []
 
 class Deck():
-    values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    suits = ['clubs', 'diamonds', 'hearts', 'spades']
+    def __init__(self):
+        # building deck of cards with nested for loop:
+        values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        suits = ['clubs', 'diamonds', 'hearts', 'spades']
+        self.cards = []
+        for suit in suits:
+            for value in values:
+                self.cards.append(Card(value, suit))
+        print(self.cards)
 
 playing = True
 
@@ -27,17 +34,24 @@ while playing:
     player = Player(name=player_name)
     dealer = Player(name='Dealer')
 
+    # Display dealer's and player's cards:
     print('\n')
     print(f'{dealer.name} has {dealer.hand}')
     print(f'{player.name} has {player.hand}', '\n')
 
     time.sleep(1)
 
+    # Placeholder for actual game logic
     print("Pretend we played a game...", '\n')
+    deck = Deck()
+    print(deck.cards)
 
+    # Is it time to break out of the main game loop?
     play_again = input("Would you like to play again? (y/n) ")
 
     if play_again == 'n':
         playing = False
 
+
+# TODO:
 # handling aces: if aces in hand and total over 21, subtract 10 times the number of aces.
