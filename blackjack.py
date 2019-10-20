@@ -1,3 +1,5 @@
+import time
+
 class Game():
     def __init__(self):
         playing = True
@@ -22,7 +24,15 @@ while playing:
     player = Player(name=player_name)
     dealer = Player(name='Dealer')
 
+    print('\n')
     print(f'{dealer.name} has {dealer.hand}')
-    print(f'{player.name} has {player.hand}')
+    print(f'{player.name} has {player.hand}', '\n')
 
-    playing = False
+    time.sleep(1)
+
+    print("Pretend we played a game...", '\n')
+
+    play_again = input("Would you like to play again? (y/n) ")
+
+    if play_again == 'n':
+        playing = False
