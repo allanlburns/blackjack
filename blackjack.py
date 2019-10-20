@@ -1,4 +1,5 @@
 import time
+from random import randint
 
 class Game():
     def __init__(self):
@@ -21,7 +22,7 @@ class Deck():
     def __init__(self):
         # building deck of cards with nested for loop:
         values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-        suits = ['clubs', 'diamonds', 'hearts', 'spades']
+        suits = ['C', 'D', 'H', 'S']
         self.cards = []
         for suit in suits:
             for value in values:
@@ -29,7 +30,7 @@ class Deck():
 
     def deal_card(self, player, quantity=1):
         for num in range(0, quantity):
-            player.hand.append(self.cards.pop())
+            player.hand.append(self.cards.pop(randint(0, len(self.cards))))
 
 playing = True
 
@@ -53,18 +54,22 @@ while playing:
         print(card)
 
     # testing deck.deal()
-    print("Player's hand before dealing cards =", end=" ")
+    print(f"{player.name}'s hand before dealing cards = ")
     for card in player.hand:
         print(card, end='')
+
+    print('\n')
+
     print(f"Cards in deck before dealing cards =", end=" ")
     for card in deck.cards:
         print(card, end='')
 
     deck.deal_card(player, 2)
 
-    print("Player's hand after dealing cards =", end=" ")
+    print('\n', f"{player.name}'s hand after dealing cards =", end=" ")
     for card in player.hand:
         print(card, end='')
+    print('\n', '\n')
     print(f"Cards in deck after dealing cards =", end=" ")
     for card in deck.cards:
         print(card, end='')
