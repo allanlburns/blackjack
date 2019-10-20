@@ -1,5 +1,5 @@
 import time
-from random import randint
+from random import randint, choice
 
 class Game():
     def __init__(self):
@@ -18,6 +18,16 @@ class Player():
         self.total = 0
         self.hand = []
 
+        def score(self):
+            for card in self.hand:
+                if card == 'A':
+                    self.total += 11
+                elif card in ['J', 'Q', 'K']:
+                    self.total += 10
+                else:
+                    self.total += int(card)
+            return self.total
+
 class Deck():
     def __init__(self):
         # building deck of cards with nested for loop:
@@ -30,7 +40,7 @@ class Deck():
 
     def deal_card(self, player, quantity=1):
         for num in range(0, quantity):
-            player.hand.append(self.cards.pop(randint(0, len(self.cards))))
+            player.hand.append(self.cards.pop(randint(0, len(self.cards) - 1)))
 
 playing = True
 
@@ -41,38 +51,24 @@ while playing:
     dealer = Player(name='Dealer')
 
     # Display dealer's and player's cards:
-    print('\n')
-    print(f'{dealer.name} has {dealer.hand}')
-    print(f'{player.name} has {player.hand}', '\n')
-
-    time.sleep(1)
 
     # Placeholder for actual game logic
     print("Pretend we played a game...", '\n')
     deck = Deck()
-    for card in deck.cards:
-        print(card)
 
-    # testing deck.deal()
-    print(f"{player.name}'s hand before dealing cards = ")
-    for card in player.hand:
-        print(card, end='')
-
-    print('\n')
-
-    print(f"Cards in deck before dealing cards =", end=" ")
-    for card in deck.cards:
-        print(card, end='')
 
     deck.deal_card(player, 2)
+    deck.deal_card(dealer, 2)
 
-    print('\n', f"{player.name}'s hand after dealing cards =", end=" ")
+    print('\n', f"{player.name}'s hand after dealing cards:", end=" ")
     for card in player.hand:
         print(card, end='')
     print('\n', '\n')
-    print(f"Cards in deck after dealing cards =", end=" ")
-    for card in deck.cards:
+    print('\n', f"{dealer.name}'s hand:", end=" ")
+    print("? of ?,", end=' ')
+    for card in dealer.hand[1:]:
         print(card, end='')
+
 
     # Is it time to break out of the main game loop?
     play_again = input("Would you like to play again? (y/n) ")
