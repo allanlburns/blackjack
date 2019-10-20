@@ -5,16 +5,19 @@ class Game():
         playing = True
 
 class Card():
-    pass
+    def __init__(self, suit, value):
+        self.suit = suit
+        self.value = value
 
 class Player():
     def __init__(self, name):
         self.name = name
-        self.score = 0
+        self.total = 0
         self.hand = []
 
 class Deck():
-    pass
+    values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+    suits = ['clubs', 'diamonds', 'hearts', 'spades']
 
 playing = True
 
@@ -36,3 +39,5 @@ while playing:
 
     if play_again == 'n':
         playing = False
+
+# handling aces: if aces in hand and total over 21, subtract 10 times the number of aces.
