@@ -9,7 +9,7 @@ class Card():
         self.suit = suit
         self.value = value
     def __str__(self):
-        return f'{self.value} of {self.suit}'
+        return f'{self.value} of {self.suit} '
 
 class Player():
     def __init__(self, name):
@@ -26,6 +26,10 @@ class Deck():
         for suit in suits:
             for value in values:
                 self.cards.append(Card(suit, value))
+
+    def deal_card(self, player, quantity=1):
+        for num in range(0, quantity):
+            player.hand.append(self.cards.pop())
 
 playing = True
 
@@ -47,6 +51,23 @@ while playing:
     deck = Deck()
     for card in deck.cards:
         print(card)
+
+    # testing deck.deal()
+    print("Player's hand before dealing cards =", end=" ")
+    for card in player.hand:
+        print(card, end='')
+    print(f"Cards in deck before dealing cards =", end=" ")
+    for card in deck.cards:
+        print(card, end='')
+
+    deck.deal_card(player, 2)
+
+    print("Player's hand after dealing cards =", end=" ")
+    for card in player.hand:
+        print(card, end='')
+    print(f"Cards in deck after dealing cards =", end=" ")
+    for card in deck.cards:
+        print(card, end='')
 
     # Is it time to break out of the main game loop?
     play_again = input("Would you like to play again? (y/n) ")
