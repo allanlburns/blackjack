@@ -53,6 +53,9 @@ class Player():
         elif choice == 'stay':
             player.play = "Stay"
 
+# TODO: I think i've figured out how to implement extracting the display cards to a method, while having different display methods for the player and the dealer. Solution: Make dealer a subclass of player and override the basic display method with the method that hides the first card facedown.
+
+
     # def display_cards(self):
     #     if self.name == 'dealer':
     #         # Display dealer's second card onward:
@@ -142,11 +145,12 @@ while game.playing:
 
     while True:
         # Player: hit or stay?
-        choice = input("Would you like to hit or stay? (Hit/Stay)")
+        choice = input("Would you like to hit or stay? (Hit/Stay) ")
         if choice == 'hit':
             deck.deal_card(player)
-            player.score()
+            player.calc_score()
         if player.total > 21:
+            player.busted = True
             print("You BUSTED!!! ")
             break
         elif choice == 'stay':
@@ -167,10 +171,11 @@ while game.playing:
         # dealer: hit or stay?
         if dealer.total <= 16:
             print("Dealer hits.")
-            deck.deal_card(player)
-            dealer.score()
+            deck.deal_card(dealer)
+            dealer.calc_score()
             dealer.play = 'stay'
-        if player.total > 21:
+        if dealer.total > 21:
+            dealer.busted = True
             print("Dealer BUSTED!!! ")
             break
         elif dealer.total > 16:
@@ -194,6 +199,22 @@ while game.playing:
         print(f"You win! : Your total is {player.total} ; Dealer's total is {dealer.total}")
     elif player.total < dealer.total:
         print(f"Dealer wins! : Your total is {player.total} ; Dealer's total is {dealer.total}")
+
+        # display player's final hand and final total:
+        print(f"{player.name}'s final:", '\n')
+        for card in player.hand:
+            print(card, '\n')
+        # display player's current total
+        print('\n', f"{player.name}'s total = {player.total}")
+
+        # display player's final hand and final total:
+        print(f"{dealer.name}'s final hand:", '\n')
+        for card in dealer.hand:
+            print(card, '\n')
+        # display dealer's current total
+        print('\n', f"{dealer.name}'s total = {dealer.total}")
+
+
 
     # Is it time to break out of the main game loop?
     play_again = input("Would you like to play again? (y/n) ")
