@@ -200,19 +200,19 @@ while game.playing:
     elif player.total < dealer.total:
         print(f"Dealer wins! : Your total is {player.total} ; Dealer's total is {dealer.total}")
 
-        # display player's final hand and final total:
-        print(f"{player.name}'s final:", '\n')
-        for card in player.hand:
-            print(card, '\n')
-        # display player's current total
-        print('\n', f"{player.name}'s total = {player.total}")
+    # display player's final hand and final total:
+    print(f"{player.name}'s final:", '\n')
+    for card in player.hand:
+        print(card, '\n')
+    # display player's current total
+    print('\n', f"{player.name}'s total = {player.total}")
 
-        # display player's final hand and final total:
-        print(f"{dealer.name}'s final hand:", '\n')
-        for card in dealer.hand:
-            print(card, '\n')
-        # display dealer's current total
-        print('\n', f"{dealer.name}'s total = {dealer.total}")
+    # display player's final hand and final total:
+    print(f"{dealer.name}'s final hand:", '\n')
+    for card in dealer.hand:
+        print(card, '\n')
+    # display dealer's current total
+    print('\n', f"{dealer.name}'s total = {dealer.total}")
 
 
 
